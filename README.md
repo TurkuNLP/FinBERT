@@ -17,7 +17,7 @@ BERT model trained from scratch on Finnish.
 | Rule-based (FiNER) | 87%      |
 | BERT-Base Multilingual Cased (Google) | 88% |
 | FinBERT-Base Cased  | 91% |
-|---------------------|-----|
+
 
 ### PoS tagging
 
@@ -27,4 +27,4 @@ UD_Finnish-TDT test set, gold segmentation
 |-------------------------------|------|
 | BERT-Base Multilingual Cased (Google) | 96.93% |
 | FinBERT-Base Cased          | 98.45% |
-|-------------------------------|------|
+
