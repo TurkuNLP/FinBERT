@@ -8,6 +8,10 @@ BERT model trained from scratch on Finnish.
 
 Download the model here: [bert-base-finnish-cased.zip](http://dl.turkunlp.org/finbert/bert-base-finnish-cased.zip)
 
+## Usage
+
+If you want to use the model with the huggingface/transformers library, follow the steps in [huggingface_transformers.md]
+
 Initial, as of yet unpublished and therefore unofficial evaluation results of the model are as follows:
 
 ### Named Entity Recognition on the FiNER data
