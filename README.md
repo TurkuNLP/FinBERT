@@ -10,7 +10,7 @@ Download the model here: [bert-base-finnish-cased.zip](http://dl.turkunlp.org/fi
 
 ## Usage
 
-If you want to use the model with the huggingface/transformers library, follow the steps in [huggingface_transformers.md]
+If you want to use the model with the huggingface/transformers library, follow the steps in [huggingface_transformers.md](https://github.com/TurkuNLP/FinBERT/blob/master/huggingface_transformers.md)
 
 Initial, as of yet unpublished and therefore unofficial evaluation results of the model are as follows:
 
