@@ -2,13 +2,22 @@
 
 You need to tell the library where the model can be found like so (cut'n'paste to your code):
 
-```
+```python
+# For cased FinBERT
 import transformers
 transformers.BERT_PRETRAINED_MODEL_ARCHIVE_MAP["bert-base-finnish-cased"]="http://dl.turkunlp.org/finbert/torch-transformers/bert-base-finnish-cased/pytorch_model.bin"
 transformers.BERT_PRETRAINED_CONFIG_ARCHIVE_MAP["bert-base-finnish-cased"]="http://dl.turkunlp.org/finbert/torch-transformers/bert-base-finnish-cased/config.json"
 transformers.tokenization_bert.PRETRAINED_VOCAB_FILES_MAP["vocab_file"]["bert-base-finnish-cased"]="http://dl.turkunlp.org/finbert/torch-transformers/bert-base-finnish-cased/vocab.txt"
 transformers.tokenization_bert.PRETRAINED_POSITIONAL_EMBEDDINGS_SIZES["bert-base-finnish-cased"]=512
 transformers.tokenization_bert.PRETRAINED_INIT_CONFIGURATION["bert-base-finnish-cased"]={'do_lower_case': False}
+
+# For uncased FinBERT
+import transformers
+transformers.BERT_PRETRAINED_MODEL_ARCHIVE_MAP["bert-base-finnish-uncased"]="http://dl.turkunlp.org/finbert/torch-transformers/bert-base-finnish-uncased/pytorch_model.bin"
+transformers.BERT_PRETRAINED_CONFIG_ARCHIVE_MAP["bert-base-finnish-uncased"]="http://dl.turkunlp.org/finbert/torch-transformers/bert-base-finnish-uncased/config.json"
+transformers.tokenization_bert.PRETRAINED_VOCAB_FILES_MAP["vocab_file"]["bert-base-finnish-uncased"]="http://dl.turkunlp.org/finbert/torch-transformers/bert-base-finnish-uncased/vocab.txt"
+transformers.tokenization_bert.PRETRAINED_POSITIONAL_EMBEDDINGS_SIZES["bert-base-finnish-uncased"]=512
+transformers.tokenization_bert.PRETRAINED_INIT_CONFIGURATION["bert-base-finnish-uncased"]={'do_lower_case': True}
 ```
 
 after which you can use the model as usual:
