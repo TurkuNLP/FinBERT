@@ -24,10 +24,11 @@ Initial, as of yet unpublished and therefore unofficial evaluation results of th
 
 | Model          | Accuracy |
 |--------------------|----------|
-| Rule-based (FiNER) | 87%      |
-| BERT-Base Multilingual Cased (Google) | 88% |
-| FinBERT-Base Cased  | 91% |
+| Rule-based (FiNER) | 86.82%      |
+| BERT-Base Multilingual Cased (Google) | 90.29% |
+| FinBERT-Base Cased  | 92.40% |
 
+(FiNER tagger results from [Ruokolainen et al. 2019](https://arxiv.org/pdf/1908.04212.pdf))
 
 ### PoS tagging
 
@@ -35,6 +36,6 @@ UD_Finnish-TDT test set, gold segmentation
 
 | Model                         |      |
 |-------------------------------|------|
-| BERT-Base Multilingual Cased (Google) | 96.93% |
-| FinBERT-Base Cased          | 98.45% |
+| BERT-Base Multilingual Cased (Google) | 96.97% |
+| FinBERT-Base Cased          | 98.23% |
 
