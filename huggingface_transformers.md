@@ -23,11 +23,11 @@ transformers.tokenization_bert.PRETRAINED_INIT_CONFIGURATION["bert-base-finnish-
 after which you can use the model as usual:
 
 ```
-model = BertForMaskedLM.from_pretrained("bert-base-finnish-cased-v1")
+model = transformers.BertForMaskedLM.from_pretrained("bert-base-finnish-cased-v1")
 model.eval()
 if torch.cuda.is_available():
     model = model.cuda()
-tokenizer = BertTokenizer.from_pretrained("bert-base-finnish-cased-v1")
+tokenizer = transformers.BertTokenizer.from_pretrained("bert-base-finnish-cased-v1")
 ```
 
 ## Convert from tensorflow
