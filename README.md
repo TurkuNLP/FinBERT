@@ -2,6 +2,19 @@
 
 BERT model trained from scratch on Finnish.
 
+# Release 1.0
+
+**November 25, 2019**
+
+Download the models here:
+
+* Cased Finnish BERT Base: [bert-base-finnish-cased-v1.zip](http://dl.turkunlp.org/finbert/bert-base-finnish-cased-v1.zip)
+* Uncased Finnish BERT Base: [bert-base-finnish-uncased-v1.zip](http://dl.turkunlp.org/finbert/bert-base-finnish-uncased-v1.zip)
+
+We generally recommend the use of the cased model.
+
+(These models are identical to previously released other than naming.)
+
 # Release 0.2
 
 **October 24, 2019** Beta version of the BERT base uncased model trained from scratch on a corpus of Finnish news, online discussions, and crawled data. 
