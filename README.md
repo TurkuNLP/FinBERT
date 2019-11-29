@@ -15,26 +15,32 @@ We generally recommend the use of the cased model.
 
 If you want to use the model with the huggingface/transformers library, follow the steps in [huggingface_transformers.md](https://github.com/TurkuNLP/FinBERT/blob/master/huggingface_transformers.md)
 
+### Results
+
 Initial, as of yet unpublished and therefore unofficial evaluation results of the model are as follows:
 
-### Named Entity Recognition on the FiNER data
+#### Named Entity Recognition
+
+Evaluation on FiNER corpus ([Ruokolainen et al 2019](https://arxiv.org/abs/1908.04212))
 
 | Model          | Accuracy |
 |--------------------|----------|
-| Rule-based (FiNER) | 86.82%      |
+| **FinBERT-Base Cased**  | **92.40%** |
 | BERT-Base Multilingual Cased (Google) | 90.29% |
-| FinBERT-Base Cased  | 92.40% |
+| Rule-based (FiNER) | 86.82%      |
+
+[code](https://github.com/jouniluoma/keras-bert-ner), [data](https://github.com/mpsilfve/finer-data)
 
 (FiNER tagger results from [Ruokolainen et al. 2019](https://arxiv.org/pdf/1908.04212.pdf))
 
-### PoS tagging
+#### PoS tagging
 
 UD_Finnish-TDT test set, gold segmentation
 
 | Model                         |      |
 |-------------------------------|------|
+| **FinBERT-Base Cased**          | **98.23%** |
 | BERT-Base Multilingual Cased (Google) | 96.97% |
-| FinBERT-Base Cased          | 98.23% |
 
 ## Previous releases
 
