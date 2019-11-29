@@ -42,6 +42,8 @@ UD_Finnish-TDT test set, gold segmentation
 | **FinBERT-Base Cased**          | **98.23%** |
 | BERT-Base Multilingual Cased (Google) | 96.97% |
 
+[code](https://github.com/spyysalo/bert-pos), [data](http://hdl.handle.net/11234/1-2837)
+
 ## Previous releases
 
 ### Release 0.2
