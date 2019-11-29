@@ -1,8 +1,4 @@
-# FinBERT
-
-BERT model trained from scratch on Finnish.
-
-# Release 1.0
+## Release 1.0
 
 **November 25, 2019**
 
@@ -15,19 +11,7 @@ We generally recommend the use of the cased model.
 
 (These models are identical to previously released other than naming.)
 
-# Release 0.2
-
-**October 24, 2019** Beta version of the BERT base uncased model trained from scratch on a corpus of Finnish news, online discussions, and crawled data. 
-
-Download the model here: [bert-base-finnish-uncased.zip](http://dl.turkunlp.org/finbert/bert-base-finnish-uncased.zip)
-
-# Release 0.1
-
-**September 30, 2019** We release a beta version of the BERT base cased model trained from scratch on a corpus of Finnish news, online discussions, and crawled data. 
-
-Download the model here: [bert-base-finnish-cased.zip](http://dl.turkunlp.org/finbert/bert-base-finnish-cased.zip)
-
-## Usage
+### Usage
 
 If you want to use the model with the huggingface/transformers library, follow the steps in [huggingface_transformers.md](https://github.com/TurkuNLP/FinBERT/blob/master/huggingface_transformers.md)
 
@@ -52,3 +36,16 @@ UD_Finnish-TDT test set, gold segmentation
 | BERT-Base Multilingual Cased (Google) | 96.97% |
 | FinBERT-Base Cased          | 98.23% |
 
+## Previous releases
+
+### Release 0.2
+
+**October 24, 2019** Beta version of the BERT base uncased model trained from scratch on a corpus of Finnish news, online discussions, and crawled data. 
+
+Download the model here: [bert-base-finnish-uncased.zip](http://dl.turkunlp.org/finbert/bert-base-finnish-uncased.zip)
+
+### Release 0.1
+
+**September 30, 2019** We release a beta version of the BERT base cased model trained from scratch on a corpus of Finnish news, online discussions, and crawled data. 
+
+Download the model here: [bert-base-finnish-cased.zip](http://dl.turkunlp.org/finbert/bert-base-finnish-cased.zip)
