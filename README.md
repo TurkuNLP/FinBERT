@@ -17,8 +17,8 @@ FinBERT features a custom 50,000 wordpiece vocabulary that has much better cover
 
 | Vocabulary | Example |
 |------------|---------|
-| FinBERT    | Suomessa vaihtuu kesan aikana sekä pääministeri että valtiovarain ##ministeri . |
-| Multilingual BERT | Suomessa vai ##htuu kes ##an aikana sekä p ##ää ##minister ##i että valt ##io ##vara ##in ##minister ##i . |
+| FinBERT    | Suomessa vaihtuu kesän aikana sekä pääministeri että valtiovarain ##ministeri . |
+| Multilingual BERT | Suomessa vai ##htuu kes ##än aikana sekä p ##ää ##minister ##i että valt ##io ##vara ##in ##minister ##i . |
 
 FinBERT has been pre-trained for 1 million steps on over 3 billion tokens (24B characters) of Finnish text drawn from news, online discussion, and internet crawls. By contrast, Multilingual BERT was trained on Wikipedia texts, where the Finnish Wikipedia text is approximately 3% of the amount used to train FinBERT.
 
