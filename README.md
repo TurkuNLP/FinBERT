@@ -26,6 +26,14 @@ These features allow FinBERT to outperform not only Multilingual BERT but also a
 
 ## Results
 
+### Document classification
+
+![learning curves for Yle and Ylilauta document classification](https://raw.githubusercontent.com/TurkuNLP/FinBERT/master/img/yle-ylilauta-curves.png)
+
+FinBERT outperforms multilingual BERT (M-BERT) on document classification over a range of training set sizes on the Yle news (left) and Ylilauta online discussion (right) corpora. (Baseline classification performance with [FastText](https://fasttext.cc/) included for reference.)
+
+[[code](https://github.com/spyysalo/finbert-text-classification)][[Yle data](https://github.com/spyysalo/yle-corpus)] [[Ylilauta data](https://github.com/spyysalo/ylilauta-corpus)]
+
 ### Named Entity Recognition
 
 Evaluation on FiNER corpus ([Ruokolainen et al 2019](https://arxiv.org/abs/1908.04212))
@@ -36,9 +44,9 @@ Evaluation on FiNER corpus ([Ruokolainen et al 2019](https://arxiv.org/abs/1908.
 | Multilingual BERT | 90.29% |
 | [FiNER-tagger](https://github.com/Traubert/FiNer-rules) (rule-based) | 86.82%      |
 
-[code](https://github.com/jouniluoma/keras-bert-ner), [data](https://github.com/mpsilfve/finer-data)
-
 (FiNER tagger results from [Ruokolainen et al. 2019](https://arxiv.org/pdf/1908.04212.pdf))
+
+[[code](https://github.com/jouniluoma/keras-bert-ner)][[data](https://github.com/mpsilfve/finer-data)]
 
 ### Part of speech tagging
 
@@ -49,7 +57,7 @@ Evaluation on three Finnish corpora annotated with [Universal Dependencies](http
 | **FinBERT**       | **98.23%**  | **98.39%**  | **98.08%**  |
 | Multilingual BERT |   96.97%    |   95.87%    |   97.58%    |
 
-[code](https://github.com/spyysalo/bert-pos), [data](http://hdl.handle.net/11234/1-2837)
+[[code](https://github.com/spyysalo/bert-pos)][[data](http://hdl.handle.net/11234/1-2837)]
 
 ## Use with PyTorch
 
