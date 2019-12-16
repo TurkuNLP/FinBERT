@@ -1,6 +1,6 @@
-## Release 1.0
+## Quickstart
 
-**November 25, 2019**
+**Release 1.0** (November 25, 2019)
 
 Download the models here:
 
@@ -9,40 +9,51 @@ Download the models here:
 
 We generally recommend the use of the cased model.
 
-(These models are identical to previously released other than naming.)
+## What's this?
 
-### Usage
+A version of Google's [BERT](https://github.com/google-research/bert) deep transfer learning model for Finnish. The model can be fine-tuned to achieve state-of-the-art results for various Finnish natural language processing tasks.
 
-If you want to use the model with the huggingface/transformers library, follow the steps in [huggingface_transformers.md](https://github.com/TurkuNLP/FinBERT/blob/master/huggingface_transformers.md)
+FinBERT features a custom 50,000 wordpiece vocabulary that has much better coverage of Finnish words than e.g. the previously released [multilingual BERT](https://github.com/google-research/bert/blob/master/multilingual.md) models from Google:
 
-### Results
+| Vocabulary | Example |
+|------------|---------|
+| FinBERT    | Suomessa vaihtuu kesan aikana sekä pääministeri että valtiovarain ##ministeri . |
+| Multilingual BERT | Suomessa vai ##htuu kes ##an aikana sekä p ##ää ##minister ##i että valt ##io ##vara ##in ##minister ##i . |
 
-Initial, as of yet unpublished and therefore unofficial evaluation results of the model are as follows:
+FinBERT has been pre-trained for 1 million steps on over 3 billion tokens (24B characters) of Finnish text drawn from news, online discussion, and internet crawls. By contrast, Multilingual BERT was trained on Wikipedia texts, where the Finnish Wikipedia text is approximately 3% of the amount used to train FinBERT.
 
-#### Named Entity Recognition
+These features allow FinBERT to outperform not only Multilingual BERT but also all previously proposed models when fine-tuned for Finnish natural language processing tasks.
+
+## Results
+
+### Named Entity Recognition
 
 Evaluation on FiNER corpus ([Ruokolainen et al 2019](https://arxiv.org/abs/1908.04212))
 
 | Model          | Accuracy |
 |--------------------|----------|
-| **FinBERT-Base Cased**  | **92.40%** |
-| BERT-Base Multilingual Cased (Google) | 90.29% |
-| Rule-based (FiNER) | 86.82%      |
+| **FinBERT**  | **92.40%** |
+| Multilingual BERT | 90.29% |
+| [FiNER-tagger](https://github.com/Traubert/FiNer-rules) (rule-based) | 86.82%      |
 
 [code](https://github.com/jouniluoma/keras-bert-ner), [data](https://github.com/mpsilfve/finer-data)
 
 (FiNER tagger results from [Ruokolainen et al. 2019](https://arxiv.org/pdf/1908.04212.pdf))
 
-#### PoS tagging
+### Part of speech tagging
 
-UD_Finnish-TDT test set, gold segmentation
+Evaluation on three Finnish corpora annotated with [Universal Dependencies](https://universaldependencies.org/) part-of-speech tags: the Turku Dependency Treebank (TDT), FinnTreeBank (FTB), and Parallel UD treebank (PUD)
 
-| Model                         |      |
-|-------------------------------|------|
-| **FinBERT-Base Cased**          | **98.23%** |
-| BERT-Base Multilingual Cased (Google) | 96.97% |
+| Model             |     TDT     |     FTB     |     PUD     |
+|-------------------|-------------|-------------|-------------|
+| **FinBERT**       | **98.23%**  | **98.39%**  | **98.08%**  |
+| Multilingual BERT |   96.97%    |   95.87%    |   97.58%    |
 
 [code](https://github.com/spyysalo/bert-pos), [data](http://hdl.handle.net/11234/1-2837)
+
+## Use with PyTorch
+
+If you want to use the model with the huggingface/transformers library, follow the steps in [huggingface_transformers.md](https://github.com/TurkuNLP/FinBERT/blob/master/huggingface_transformers.md)
 
 ## Previous releases
 
