@@ -9,6 +9,8 @@ Download the models here:
 
 We generally recommend the use of the cased model.
 
+Paper presenting Finnish BERT: [arXiv:1912.07076](https://arxiv.org/abs/1912.07076)
+
 ## What's this?
 
 A version of Google's [BERT](https://github.com/google-research/bert) deep transfer learning model for Finnish. The model can be fine-tuned to achieve state-of-the-art results for various Finnish natural language processing tasks.
