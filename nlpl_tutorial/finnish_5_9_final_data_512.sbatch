@@ -27,5 +27,5 @@ mkdir -p $OUTPUT_DIR
 cd $BERT_DIR
 
 export NCCL_DEBUG=INFO
-srun python run_pretraining.py --input_file=/scratch/project_2001553/data-sep-2019/finnish/tfrecords/cased/512/* --output_dir=$OUTPUT_DIR --do_train=True --do_eval=False --bert_config_file=$BERT_DIR/finnish_main_config_50k.json --train_batch_size=20 --max_seq_length=512 --max_predictions_per_seq=77 --num_train_steps=1000000 --num_warmup_steps=10000 --learning_rate=1e-4 --horovod --use_xla --use_fp16
+srun python run_pretraining.py --input_file=/scratch/project_2001553/data-sep-2019/finnish/tfrecords/cased/512/* --output_dir=$OUTPUT_DIR --do_train=True --do_eval=False --bert_config_file=$BERT_DIR/finnish_main_config_50k.json --train_batch_size=20 --max_seq_length=512 --max_predictions_per_seq=77 --num_train_steps=1000000 --num_warmup_steps=10000 --save_checkpoints_steps=10000 --learning_rate=1e-4 --horovod --use_xla --use_fp16
 seff $SLURM_JOBID
