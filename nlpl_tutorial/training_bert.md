@@ -2,12 +2,19 @@
 
 ## General info
 
-We follow the training schedule used in the original BERT: training for 1M steps using Adam with a learning rate of 1e-4 and a warmup of 1% followed by linear decay.
+We follow the training schedule used in the original [BERT paper](https://arxiv.org/abs/1810.04805): training for 1M steps using Adam with a learning rate of 1e-4 and a warmup of 1% followed by linear decay. The batch size used is 140\*8 GPUs = 1120. This is quite a lot more than the 256 used in the original, as we were attempting to make the training stable. Later experiments with BERT pretraining have indicated that using only 4 GPUs, and thus half the batch size, is still stable. Using 8 GPUs with the 512 sequence length is still recommended.
+
 Training is done in two phases: with sequence lengths 128 and 512. 900k steps are done with length 128 and 100k steps with 512 length. This is done for computational efficiency, as the attention mechanism scales quadratically with sequence length and the position embeddings for sequence length 512 can be learned fairly quickly in the last part of training.
 
-We used [Nvidia's modified version](https://github.com/NVIDIA/DeepLearningExamples/tree/master/TensorFlow/LanguageModeling/BERT) of Google's original code, with minor modifications. The benefits in Nvidia's implementation are support for multi-GPU and multi-node training, [XLA](https://www.tensorflow.org/xla) support and half-precision support. The first one makes pretraining the model on GPUs feasible in the first place and the latter two bring impressive performance benefits. Note that Nvidia has since updated their repository with some changes that may not work with our sbatch files, but I adapting is *probably* quite easy. Our modified version is [here](https://github.com/haamis/DeepLearningExamples_FinBERT/tree/master/TensorFlow/LanguageModeling/BERT_nonscaling), and links to files are in this document are to our fork.
+We use [Nvidia's modified version](https://github.com/NVIDIA/DeepLearningExamples/tree/master/TensorFlow/LanguageModeling/BERT) of Google's original code, with minor modifications. The benefits in Nvidia's implementation are support for multi-GPU and multi-node training, [XLA](https://www.tensorflow.org/xla) support and half-precision support. The first one makes pretraining the model on GPUs feasible in the first place and the latter two bring impressive performance benefits. Note that Nvidia has since updated their repository with some changes that may not work with our sbatch files, but adapting is *probably* quite easy. Our modified version is [here](https://github.com/haamis/DeepLearningExamples_FinBERT/tree/master/TensorFlow/LanguageModeling/BERT_nonscaling), and links to files in this document are to our fork.
+
+Our modifications are:
+  * Removing learning rate scaling by number of GPUs added by Nvidia as this made the training unstable. [(link)](https://github.com/haamis/DeepLearningExamples_FinBERT/blob/master/TensorFlow/LanguageModeling/BERT_nonscaling/run_pretraining.py#L492)
+  * Setting the code to save 100 most recent checkpoints. This means that when saving a checkpoint every 10000 steps, every checkpoint is kept from beginning to end. [(link)](https://github.com/haamis/DeepLearningExamples_FinBERT/blob/master/TensorFlow/LanguageModeling/BERT_nonscaling/run_pretraining.py#L481)
 
 ## Steps to take
+
+First we must define a [`bert_config.json`](https://github.com/haamis/DeepLearningExamples_FinBERT/blob/master/TensorFlow/LanguageModeling/BERT_nonscaling/bert_config.json) file. The only thing that needs to be changed compared to the linked file is `"vocab_size"` which has to be equal to the size of your created vocabulary. This is just `wc -l <vocab file>`.
 
 The code to call is [`run_pretraining.py`](https://github.com/haamis/DeepLearningExamples_FinBERT/blob/master/TensorFlow/LanguageModeling/BERT_nonscaling/run_pretraining.py). [Example of an sbatch file](../nlpl_tutorial/finnish_5_9_final_data.sbatch) to run on CSC's Puhti:
 
@@ -67,7 +74,7 @@ srun python run_pretraining.py --input_file=/scratch/project_2001553/data-sep-20
 seff $SLURM_JOBID
 ```
 
-This will then be called with `sbatch <file>`. The code will go through about 260k steps in 3 days, so multiple sequential jobs will be needed. All the jobs could be queued at one time, however it is recommended to keep an eye on the training logs in case the training diverges, even though these settings shouldn't cause that to happen.
+This will then be called with `sbatch <file>`. The code will go through about 260k steps in 3 days, so multiple sequential jobs will be needed. All the jobs could be queued at one time, however it is recommended to keep an eye on the training logs in case the training diverges, .
 
 The easiest way to sequentially queue these runs (in my experience) is with `sbatch --dependency=singleton <file>`. This only runs one job with a given name from the same user at a time. More info in [SLURM's documentation](https://slurm.schedmd.com/sbatch.html).
 
@@ -80,3 +87,6 @@ Once the 900k steps of the 128 phase are done, the 512 phase is run with a [slig
 
 ## Uncased training
 For training an uncased model you only need to change the input files, output directory and job name (for `--dependency=singleton` to work if training both models in parallel)
+
+## Technical considerations on Puhti
+When using XLA on Puhti you might come across errors complaining about a file called `libdevice` or `ptxas`. These errors are caused by Puhti's environment being slightly broken with regards to CUDA, possibly due to inflexibility on CUDA's side. The problem can be solved by creating a symlink to the files in the BERT directory. Currently the files are in `/appl/spack/install-tree/gcc-8.3.0/cuda-10.1.168-mrdepn/bin/ptxas` and `/appl/spack/install-tree/gcc-8.3.0/cuda-10.1.168-mrdepn/nvvm/libdevice/libdevice.10.bc`, however these locations may change with CUDA updates. The problem has been reported to CSC.
