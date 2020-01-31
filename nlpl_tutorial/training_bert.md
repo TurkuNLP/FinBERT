@@ -1,11 +1,13 @@
 # How to train your ~dragon~ BERT
 
-Once the tf_records have been generated, we move on to training with that data.
+## General info
 
 We follow the training schedule used in the original BERT: training for 1M steps using Adam with a learning rate of 1e-4 and a warmup of 1% followed by linear decay.
 Training is done in two phases: with sequence lengths 128 and 512. 900k steps are done with length 128 and 100k steps with 512 length. This is done for computational efficiency, as the attention mechanism scales quadratically with sequence length and the position embeddings for sequence length 512 can be learned fairly quickly in the last part of training.
 
-We used [Nvidia's modified version](https://github.com/NVIDIA/DeepLearningExamples/tree/master/TensorFlow/LanguageModeling/BERT) of Google's original code, with minor modifications. Note that Nvidia has since updated their repository with some changes that may not work with our sbatch files, but I adapting is *probably* quite easy. Our modified version is [here](https://github.com/haamis/DeepLearningExamples_FinBERT/tree/master/TensorFlow/LanguageModeling/BERT_nonscaling), and links to files are in this document are to our fork.
+We used [Nvidia's modified version](https://github.com/NVIDIA/DeepLearningExamples/tree/master/TensorFlow/LanguageModeling/BERT) of Google's original code, with minor modifications. The benefits in Nvidia's implementation are support for multi-GPU and multi-node training, [XLA](https://www.tensorflow.org/xla) support and half-precision support. The first one makes pretraining the model on GPUs feasible in the first place and the latter two bring impressive performance benefits. Note that Nvidia has since updated their repository with some changes that may not work with our sbatch files, but I adapting is *probably* quite easy. Our modified version is [here](https://github.com/haamis/DeepLearningExamples_FinBERT/tree/master/TensorFlow/LanguageModeling/BERT_nonscaling), and links to files are in this document are to our fork.
+
+## Steps to take
 
 The code to call is [`run_pretraining.py`](https://github.com/haamis/DeepLearningExamples_FinBERT/blob/master/TensorFlow/LanguageModeling/BERT_nonscaling/run_pretraining.py). [Example of an sbatch file](../nlpl_tutorial/finnish_5_9_final_data.sbatch) to run on CSC's Puhti:
 
@@ -65,7 +67,9 @@ srun python run_pretraining.py --input_file=/scratch/project_2001553/data-sep-20
 seff $SLURM_JOBID
 ```
 
-This will then be called with `sbatch <file>`. The code will go through about 260k steps in 3 days, so multiple sequential jobs will be needed. The easiest way to do this (in my experience) is to queue them with `sbatch --dependency=singleton <file>`. This only runs one job with a given name from the same user at a time. More info in [SLURM's documentation](https://slurm.schedmd.com/sbatch.html).
+This will then be called with `sbatch <file>`. The code will go through about 260k steps in 3 days, so multiple sequential jobs will be needed. All the jobs could be queued at one time, however it is recommended to keep an eye on the training logs in case the training diverges, even though these settings shouldn't cause that to happen.
+
+The easiest way to sequentially queue these runs (in my experience) is with `sbatch --dependency=singleton <file>`. This only runs one job with a given name from the same user at a time. More info in [SLURM's documentation](https://slurm.schedmd.com/sbatch.html).
 
 Once the 900k steps of the 128 phase are done, the 512 phase is run with a [slightly modified sbatch file](../nlpl_tutorial/finnish_5_9_final_data_512.sbatch). The differences to the example above are:
   * `max_seq_length` set to 512
@@ -73,3 +77,6 @@ Once the 900k steps of the 128 phase are done, the 512 phase is run with a [slig
   * `max_predictions_per_seq` set to the same as when generating the tfrecords (around 77-80)
   * `batch_size` set lower, 20 fits in memory
   * `num_train_steps` set to 1000000
+
+## Uncased training
+For training an uncased model you only need to change the input files, output directory and job name (for `--dependency=singleton` to work if training both models in parallel)
