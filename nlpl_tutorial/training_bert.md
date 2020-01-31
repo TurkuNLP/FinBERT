@@ -42,6 +42,7 @@ mkdir -p $OUTPUT_DIR
 cd $BERT_DIR
 
 export NCCL_DEBUG=INFO
+
 # The actual command we want to run.
 # Batch size is the max amount we can fit into VRAM, seq_length is 128 for the first part of the training.
 # Max_predictions_per_seq is the default and must be the same as set in the tfrecord generation.
