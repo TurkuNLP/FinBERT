@@ -16,7 +16,7 @@ Our modifications are:
 
 First we must define a [`bert_config.json`](https://github.com/haamis/DeepLearningExamples_FinBERT/blob/master/TensorFlow/LanguageModeling/BERT_nonscaling/bert_config.json) file. The only thing that needs to be changed compared to the linked file is `"vocab_size"` which has to be equal to the size of your created vocabulary. This is just `wc -l <vocab file>`.
 
-The code to call is [`run_pretraining.py`](https://github.com/haamis/DeepLearningExamples_FinBERT/blob/master/TensorFlow/LanguageModeling/BERT_nonscaling/run_pretraining.py). [Example of an sbatch file](../nlpl_tutorial/finnish_5_9_final_data.sbatch) to run on CSC's Puhti:
+Next step is to run [`run_pretraining.py`](https://github.com/haamis/DeepLearningExamples_FinBERT/blob/master/TensorFlow/LanguageModeling/BERT_nonscaling/run_pretraining.py). [Example of an sbatch file](../nlpl_tutorial/finnish_5_9_final_data.sbatch) to run on CSC's Puhti:
 
 ```bash
 #!/bin/bash
@@ -79,14 +79,14 @@ This will then be called with `sbatch <file>`. The code will go through about 26
 The easiest way to sequentially queue these runs (in my experience) is with `sbatch --dependency=singleton <file>`. This only runs one job with a given name from the same user at a time. More info in [SLURM's documentation](https://slurm.schedmd.com/sbatch.html).
 
 Once the 900k steps of the 128 phase are done, the 512 phase is run with a [slightly modified sbatch file](../nlpl_tutorial/finnish_5_9_final_data_512.sbatch). The differences to the example above are:
-  * `max_seq_length` set to 512
-  * input files changed to tfrecords created with 512 seq_length
-  * `max_predictions_per_seq` set to the same as when generating the tfrecords (around 77-80)
-  * `batch_size` set lower, 20 fits in memory
-  * `num_train_steps` set to 1000000
+  * `max_seq_length` set to 512.
+  * Input files changed to tfrecords created with 512 seq_length.
+  * `max_predictions_per_seq` set to the same as when generating the tfrecords (around 77-80).
+  * `batch_size` set lower, 20 fits in memory.
+  * `num_train_steps` set to 1000000.
 
 ## Uncased training
-For training an uncased model you only need to change the input files, output directory and job name (for `--dependency=singleton` to work if training both models in parallel)
+For training an uncased model you only need to change the input files, output directory and job name (for `--dependency=singleton` to work if training both models in parallel).
 
 ## Technical considerations on Puhti
 When using XLA on Puhti you might come across errors complaining about a file called `libdevice` or `ptxas`. These errors are caused by Puhti's environment being slightly broken with regards to CUDA, possibly due to inflexibility on CUDA's side. The problem can be solved by creating a symlink to the files in the BERT directory. Currently the files are in `/appl/spack/install-tree/gcc-8.3.0/cuda-10.1.168-mrdepn/bin/ptxas` and `/appl/spack/install-tree/gcc-8.3.0/cuda-10.1.168-mrdepn/nvvm/libdevice/libdevice.10.bc`, however these locations may change with CUDA updates. The problem has been reported to CSC.
