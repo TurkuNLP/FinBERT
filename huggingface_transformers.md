@@ -1,34 +1,16 @@
-# Use the model with huggingface/transformers
+be# Use the model with huggingface/transformers
 
-You need to tell the library where the model can be found like so (cut'n'paste to your code):
-
-```python
-# For cased FinBERT
-import transformers
-transformers.BERT_PRETRAINED_MODEL_ARCHIVE_MAP["bert-base-finnish-cased-v1"]="http://dl.turkunlp.org/finbert/torch-transformers/bert-base-finnish-cased-v1/pytorch_model.bin"
-transformers.BERT_PRETRAINED_CONFIG_ARCHIVE_MAP["bert-base-finnish-cased-v1"]="http://dl.turkunlp.org/finbert/torch-transformers/bert-base-finnish-cased-v1/config.json"
-transformers.tokenization_bert.PRETRAINED_VOCAB_FILES_MAP["vocab_file"]["bert-base-finnish-cased-v1"]="http://dl.turkunlp.org/finbert/torch-transformers/bert-base-finnish-cased-v1/vocab.txt"
-transformers.tokenization_bert.PRETRAINED_POSITIONAL_EMBEDDINGS_SIZES["bert-base-finnish-cased-v1"]=512
-transformers.tokenization_bert.PRETRAINED_INIT_CONFIGURATION["bert-base-finnish-cased-v1"]={'do_lower_case': False}
-
-# For uncased FinBERT
-import transformers
-transformers.BERT_PRETRAINED_MODEL_ARCHIVE_MAP["bert-base-finnish-uncased-v1"]="http://dl.turkunlp.org/finbert/torch-transformers/bert-base-finnish-uncased-v1/pytorch_model.bin"
-transformers.BERT_PRETRAINED_CONFIG_ARCHIVE_MAP["bert-base-finnish-uncased-v1"]="http://dl.turkunlp.org/finbert/torch-transformers/bert-base-finnish-uncased-v1/config.json"
-transformers.tokenization_bert.PRETRAINED_VOCAB_FILES_MAP["vocab_file"]["bert-base-finnish-uncased-v1"]="http://dl.turkunlp.org/finbert/torch-transformers/bert-base-finnish-uncased-v1/vocab.txt"
-transformers.tokenization_bert.PRETRAINED_POSITIONAL_EMBEDDINGS_SIZES["bert-base-finnish-uncased-v1"]=512
-transformers.tokenization_bert.PRETRAINED_INIT_CONFIGURATION["bert-base-finnish-uncased-v1"]={'do_lower_case': True}
-```
-
-after which you can use the model as usual:
+FinBERT is included in transformers, so you can simply use the model as usual:
 
 ```
-model = transformers.BertForMaskedLM.from_pretrained("bert-base-finnish-cased-v1")
+model = transformers.BertForMaskedLM.from_pretrained("bert-base-finnish-cased-v1") 
 model.eval()
 if torch.cuda.is_available():
     model = model.cuda()
 tokenizer = transformers.BertTokenizer.from_pretrained("bert-base-finnish-cased-v1")
 ```
+Use "bert-base-finnish-uncased-v1" if you want to use the uncased model.
+
 
 ## Convert from tensorflow
 
