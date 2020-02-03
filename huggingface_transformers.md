@@ -1,4 +1,4 @@
-be# Use the model with huggingface/transformers
+# Use the model with huggingface/transformers
 
 FinBERT is included in transformers, so you can simply use the model as usual:
 
