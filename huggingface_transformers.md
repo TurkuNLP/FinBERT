@@ -3,11 +3,11 @@
 FinBERT is included in transformers, so you can simply use the model as usual:
 
 ```
-model = transformers.BertForMaskedLM.from_pretrained("bert-base-finnish-cased-v1") 
+model = transformers.BertForMaskedLM.from_pretrained("TurkuNLP/bert-base-finnish-cased-v1") 
 model.eval()
 if torch.cuda.is_available():
     model = model.cuda()
-tokenizer = transformers.BertTokenizer.from_pretrained("bert-base-finnish-cased-v1")
+tokenizer = transformers.BertTokenizer.from_pretrained("TurkuNLP/bert-base-finnish-cased-v1")
 ```
 Use "bert-base-finnish-uncased-v1" if you want to use the uncased model.
 
