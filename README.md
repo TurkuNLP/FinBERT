@@ -65,6 +65,10 @@ Evaluation on three Finnish corpora annotated with [Universal Dependencies](http
 
 If you want to use the model with the huggingface/transformers library, follow the steps in [huggingface_transformers.md](https://github.com/TurkuNLP/FinBERT/blob/master/huggingface_transformers.md)
 
+## Text preprocessing tools
+
+The tools used for preprocessing text for FinBERT training are available in the repository https://github.com/TurkuNLP/deepfin-tools .
+
 ## Previous releases
 
 ### Release 0.2
